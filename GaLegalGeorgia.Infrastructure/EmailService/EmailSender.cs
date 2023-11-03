@@ -1,5 +1,6 @@
 ﻿using GaLegalGeorgia.Application.Contracts.Email;
 using GaLegalGeorgia.Application.Models.Email;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
@@ -13,26 +14,32 @@ namespace GaLegalGeorgia.Infrastructure.EmailService
 {
     public class EmailSender : IEmailSender
     {
-        public EmailSettings _emailSettings { get; }
+        private readonly string serviceEmail;
+        private readonly string SendgridApiKey;
+        private readonly string currentWebsiteUrl;
+        public EmailSender(IConfiguration configuration) {
 
-        public EmailSender(IOptions<EmailSettings> emailSettings)
-        {
-            _emailSettings = emailSettings.Value;
+            serviceEmail = configuration.GetSection("ServiceEmail")?.Value;
+            SendgridApiKey = configuration.GetSection("SendgridApiKey")?.Value?? "test";
         }
-        public async Task<bool> SendEmail(EmailMessage email)
+
+        public async Task<bool> SendPasswordResetEmail(string token, string recipientEmail)
         {
-            var client = new SendGridClient(_emailSettings.ApiKey);
-            var to = new EmailAddress(email.To);
-            var from = new EmailAddress
-            {
-                Email = _emailSettings.FromAddress,
-                Name = _emailSettings.FromName
-            };
+            var htmlContent = $"<strong>To reset your password follow the <a href='{currentWebsiteUrl}pw-recovery?token={token}'>link</a> </strong>";
+            var result = await SendEmail("Forgot Password", recipientEmail, htmlContent);
+            return result;
+        }
 
-            var message = MailHelper.CreateSingleEmail(from, to, email.Subject, email.Body, email.Body);
-            var response = await client.SendEmailAsync(message);
-
+        private async Task<bool> SendEmail(string emailSubject, string recipientEmail, string htmlContent, string plainTextContent = null)
+        {
+            var client = new SendGridClient(SendgridApiKey);
+            var from = new EmailAddress(serviceEmail, "GaLegalGeorgia");
+            var subject = emailSubject;
+            var to = new EmailAddress(recipientEmail, "Givi");
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await client.SendEmailAsync(msg);
             return response.IsSuccessStatusCode;
         }
+
     }
 }

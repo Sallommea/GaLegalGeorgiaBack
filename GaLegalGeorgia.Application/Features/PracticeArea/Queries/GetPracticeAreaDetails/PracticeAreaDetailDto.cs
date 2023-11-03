@@ -10,7 +10,8 @@ namespace GaLegalGeorgia.Application.Features.PracticeArea.Queries.GetPracticeAr
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
-         public ICollection<string> Content { get; set; }
-       // public string Content { get; set; } = string.Empty;
+        public ICollection<string> Content { get; set; }
+
+       
     }
 }

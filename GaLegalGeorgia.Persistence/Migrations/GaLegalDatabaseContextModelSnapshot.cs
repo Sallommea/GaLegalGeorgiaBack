@@ -63,7 +63,13 @@ namespace GaLegalGeorgia.Persistence.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ContentEn")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleEn")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -74,8 +80,10 @@ namespace GaLegalGeorgia.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            Content = "ab",
-                            Title = "სამოქალაქო სამართალი"
+                            Content = "წარმომადგენლობა სასამართლოში",
+                            ContentEn = "Court Representation",
+                            Title = "სამოქალაქო სამართალი",
+                            TitleEn = "Civil Law"
                         });
                 });
 #pragma warning restore 612, 618

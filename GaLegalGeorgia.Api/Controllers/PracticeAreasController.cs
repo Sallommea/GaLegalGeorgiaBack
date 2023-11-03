@@ -22,17 +22,37 @@ namespace GaLegalGeorgia.Api.Controllers
         }
         // GET: api/<PracticeAreasController>
         [HttpGet]
+       
         public async Task<List<PracticeAreaDto>> Get()
         {
-            var practiceAreas = await _mediator.Send(new Application.Features.PracticeArea.Queries.GetAllPracticeAreas.GetPracticeAreasQuery());
-            return practiceAreas;
+            // Get the language value from the cookie
+            var languageCookie = HttpContext.Request.Cookies["lang"];
+           
+            // If the language cookie is not set, you can set a default value
+            Language language;
+            if (Enum.TryParse(languageCookie, out language) == false)
+            {
+                language = Language.ge; // Set a default value (e.g., English)
+            }
+            
+            var practiceAreas = await _mediator.Send(new GetPracticeAreasQuery(language));
+             return practiceAreas;
+          
         }
 
         // GET api/<PracticeAreasController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<PracticeAreaDetailDto>> Get(int id)
         {
-            var practiceAreaDetails = await _mediator.Send(new GetPracticeAreasDetailsQuery(id));
+            // Get the language value from the cookie
+            var languageCookie = HttpContext.Request.Cookies["lang"];
+            // If the language cookie is not set, you can set a default value
+            LanguageDetails language;
+            if (Enum.TryParse(languageCookie, out language) == false)
+            {
+                language = LanguageDetails.ge; // Set a default value (e.g., English)
+            }
+            var practiceAreaDetails = await _mediator.Send(new GetPracticeAreasDetailsQuery(id, language));
             return Ok(practiceAreaDetails);
 
         }

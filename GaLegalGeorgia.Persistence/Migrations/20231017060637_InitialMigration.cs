@@ -35,7 +35,9 @@ namespace GaLegalGeorgia.Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TitleEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContentEn = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,8 +46,8 @@ namespace GaLegalGeorgia.Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "PracticeAreas",
-                columns: new[] { "Id", "Content", "Title" },
-                values: new object[] { 1, "ab", "სამოქალაქო სამართალი" });
+                columns: new[] { "Id", "Content", "ContentEn", "Title", "TitleEn" },
+                values: new object[] { 1, "წარმომადგენლობა სასამართლოში", "Court Representation", "სამოქალაქო სამართალი", "Civil Law" });
         }
 
         /// <inheritdoc />

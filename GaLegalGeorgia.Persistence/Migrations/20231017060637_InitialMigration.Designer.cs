@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GaLegalGeorgia.Persistence.Migrations
 {
     [DbContext(typeof(GaLegalDatabaseContext))]
-    [Migration("20231003154312_InitialMigration")]
+    [Migration("20231017060637_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -66,7 +66,13 @@ namespace GaLegalGeorgia.Persistence.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ContentEn")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleEn")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -77,8 +83,10 @@ namespace GaLegalGeorgia.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            Content = "ab",
-                            Title = "სამოქალაქო სამართალი"
+                            Content = "წარმომადგენლობა სასამართლოში",
+                            ContentEn = "Court Representation",
+                            Title = "სამოქალაქო სამართალი",
+                            TitleEn = "Civil Law"
                         });
                 });
 #pragma warning restore 612, 618

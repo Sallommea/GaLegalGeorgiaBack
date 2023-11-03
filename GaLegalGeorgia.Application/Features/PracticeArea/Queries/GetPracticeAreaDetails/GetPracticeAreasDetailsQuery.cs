@@ -7,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace GaLegalGeorgia.Application.Features.PracticeArea.Queries.GetPracticeAreaDetails
 {
-  
-        public record GetPracticeAreasDetailsQuery(int Id) : IRequest<PracticeAreaDetailDto>;
+    public enum LanguageDetails
+    {
+        en,
+        ge,
+
+    }
+        public sealed record GetPracticeAreasDetailsQuery(int Id, LanguageDetails Language ) : IRequest<PracticeAreaDetailDto>;
     
 }

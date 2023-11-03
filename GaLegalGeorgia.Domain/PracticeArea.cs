@@ -6,6 +6,9 @@ namespace GaLegalGeorgia.Domain
     {
         public string Title { get; set; } = string.Empty;
         public string Content { get; set; }
+
+        public string TitleEn { get; set; }
+        public string ContentEn { get; set; }
     }
 
 

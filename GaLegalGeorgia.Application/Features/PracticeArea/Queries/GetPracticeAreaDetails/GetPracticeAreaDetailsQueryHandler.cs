@@ -8,39 +8,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GaLegalGeorgia.Domain;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace GaLegalGeorgia.Application.Features.PracticeArea.Queries.GetPracticeAreaDetails
 {
-    public class GetPracticeAreaDetailsQueryHandler : IRequestHandler<GetPracticeAreasDetailsQuery, PracticeAreaDetailDto>
+    public sealed class GetPracticeAreaDetailsQueryHandler : IRequestHandler<GetPracticeAreasDetailsQuery, PracticeAreaDetailDto>
     {
-        private readonly IMapper _mapper;
+       
         private readonly IPracticeAreaRepository _practiceAreaRepository;
 
-        public GetPracticeAreaDetailsQueryHandler(IMapper mapper, IPracticeAreaRepository practiceAreaRepository)
+        public GetPracticeAreaDetailsQueryHandler( IPracticeAreaRepository practiceAreaRepository)
         {
-            this._mapper = mapper;
             this._practiceAreaRepository = practiceAreaRepository;
         }
 
         public async Task<PracticeAreaDetailDto> Handle(GetPracticeAreasDetailsQuery request, CancellationToken cancellationToken)
         {
-            //query the database
+            // Query the database to get the practice area details
             var practiceArea = await _practiceAreaRepository.GetByIdAsync(request.Id);
-          
-            // verify that record exists
+
+            // Verify that the record exists
             if (practiceArea == null)
                 throw new NotFoundException(nameof(PracticeArea), request.Id);
 
-        
-            // var contentArray = practiceArea.Content.Split('$', StringSplitOptions.RemoveEmptyEntries);
+            // Create a single PracticeAreaDetailDto object based on the language
+            PracticeAreaDetailDto data;
 
-            // convert data object to Dto object
-            var data = _mapper.Map<PracticeAreaDetailDto>(practiceArea);
+            if (request.Language == LanguageDetails.en)
+            {
+                data = new PracticeAreaDetailDto
+                {
+                    Id = practiceArea.Id,
+                    Title = practiceArea.TitleEn,
+                    Content = practiceArea.ContentEn.Split('$')
+                };
+            }
+            else
+            {
+                data = new PracticeAreaDetailDto
+                {
+                    Id = practiceArea.Id,
+                    Title = practiceArea.Title,
+                    Content = practiceArea.Content.Split('$')
+                };
+            }
 
-       //     data.Content = contentArray;
-            //return DTO object
             return data;
+
         }
     }
 }

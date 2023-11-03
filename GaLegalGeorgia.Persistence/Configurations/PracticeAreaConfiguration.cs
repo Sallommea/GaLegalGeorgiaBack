@@ -18,7 +18,9 @@ namespace GaLegalGeorgia.Persistence.Configurations
             {
                 Id = 1,
                 Title = "სამოქალაქო სამართალი",
-                Content = "ab"
+                Content = "წარმომადგენლობა სასამართლოში",
+                TitleEn = "Civil Law",
+                ContentEn = "Court Representation"
             }); 
         }
     }

@@ -18,4 +18,9 @@
     <ProjectReference Include="..\GaLegalGeorgia.Domain\GaLegalGeorgia.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Admin\Command\UpdateUser\" />
+    <Folder Include="Features\Admin\Queries\" />
+  </ItemGroup>
+
 </Project>

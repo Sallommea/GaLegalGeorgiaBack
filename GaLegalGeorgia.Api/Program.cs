@@ -16,12 +16,15 @@ builder.Services.AddCors(options =>
     //  .AllowAnyMethod());
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("http://localhost:4200") // Allow requests from this origin
+        builder.WithOrigins("http://localhost:4200", "http://localhost:4201") // Allow requests from this origin
                .AllowAnyHeader()
-               .AllowAnyMethod();
+               .AllowAnyMethod()
+               .AllowCredentials();
     });
 
-});
+}); 
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -39,6 +42,7 @@ if (app.Environment.IsDevelopment())
 
 // Use CORS middleware
 app.UseCors();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

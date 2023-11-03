@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using GaLegalGeorgia.Application.Features.PracticeArea.Queries.GetPracticeAreaDetails;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,15 @@ using System.Threading.Tasks;
 
 namespace GaLegalGeorgia.Application.Features.PracticeArea.Queries.GetAllPracticeAreas
 {
-    public record GetPracticeAreasQuery : IRequest<List<PracticeAreaDto>>;
-    
+    public enum Language
+    {
+        en,
+        ge,
+     
+    }
+
+    public sealed record GetPracticeAreasQuery(Language Language) : IRequest<List<PracticeAreaDto>>;
+
+
 }
+

@@ -23,9 +23,14 @@ namespace GaLegalGeorgia.Application.Features.PracticeArea.Commands.UpdatePracti
                 .NotNull()
                 .MaximumLength(150).WithMessage("{PropertyName} must be fewer than 70 characters");
 
-            RuleFor(q => q)
-                .MustAsync(PracticeAreaTitleUnique)
-                .WithMessage("Leave type already exists");
+            RuleFor(p => p.TitleEn)
+               .NotEmpty().WithMessage("{PropertyName} is required")
+               .NotNull()
+               .MaximumLength(150).WithMessage("{PropertyName} must be fewer than 70 characters");
+
+            // RuleFor(q => q)
+            //  .MustAsync(PracticeAreaTitleUnique)
+            //  .WithMessage("Leave type already exists");
 
             this._practiceAreaRepository= practiceAreaRepository;
         }

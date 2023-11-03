@@ -11,5 +11,7 @@ namespace GaLegalGeorgia.Application.Features.PracticeArea.Commands.CreatePracti
     {
         public string Title { get; set; } = string.Empty;
         public string? Content { get; set; }
+        public string TitleEn { get; set; } = string.Empty;
+        public string ContentEn { get; set; } = string.Empty;
     }
 }

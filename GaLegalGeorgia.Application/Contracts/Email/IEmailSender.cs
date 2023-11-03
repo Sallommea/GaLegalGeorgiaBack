@@ -9,6 +9,6 @@ namespace GaLegalGeorgia.Application.Contracts.Email
 {
     public interface IEmailSender
     {
-        Task<bool> SendEmail(EmailMessage email);
+        Task<bool> SendPasswordResetEmail(string token, string recipientEmail);
     }
 }

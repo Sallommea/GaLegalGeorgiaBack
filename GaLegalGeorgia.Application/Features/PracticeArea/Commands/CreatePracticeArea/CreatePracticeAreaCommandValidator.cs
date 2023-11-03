@@ -16,6 +16,14 @@ namespace GaLegalGeorgia.Application.Features.PracticeArea.Commands.CreatePracti
             RuleFor(p => p.Content).NotEmpty().WithMessage("Content cannot be empty.")
                 .NotNull().WithMessage("Content cannot be null.");
 
+            RuleFor(p => p.TitleEn)
+                  .NotEmpty().WithMessage("{PropertyName} is required")
+                  .NotNull()
+                  .MaximumLength(150).WithMessage("{PropertyName} must be fewer than 150 characters");
+
+            RuleFor(p => p.ContentEn).NotEmpty().WithMessage("Content cannot be empty.")
+                .NotNull().WithMessage("Content cannot be null.");
+
             RuleFor(q => q)
                 .MustAsync(PracticeAreaNameUnique)
                 .WithMessage("Practice Area Already Exists");
