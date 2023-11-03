@@ -14,7 +14,7 @@ namespace GaLegalGeorgia.Application.MappingProfiles
     {
         public AdminProfile()
         {
-            CreateMap<Admin, AdminDto>().ReverseMap();
+            CreateMap<AdminModels, AdminDto>().ReverseMap();
         }
     }
 }

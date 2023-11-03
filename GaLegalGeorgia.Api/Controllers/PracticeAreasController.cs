@@ -4,6 +4,7 @@ using GaLegalGeorgia.Application.Features.PracticeArea.Commands.UpdatePracticeAr
 using GaLegalGeorgia.Application.Features.PracticeArea.Queries.GetAllPracticeAreas;
 using GaLegalGeorgia.Application.Features.PracticeArea.Queries.GetPracticeAreaDetails;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -62,6 +63,7 @@ namespace GaLegalGeorgia.Api.Controllers
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<ActionResult> Post(CreatePracticeAreaCommand practiceArea)
         {
             var response = await _mediator.Send(practiceArea);
@@ -74,6 +76,7 @@ namespace GaLegalGeorgia.Api.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
+        [Authorize]
         public async Task<ActionResult> Put(UpdatePracticeAreaCommand practiceArea)
         {
             await _mediator.Send(practiceArea);
@@ -84,12 +87,12 @@ namespace GaLegalGeorgia.Api.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<ActionResult> Delete(int id)
         {
             var command = new DeletePracticeAreaCommand { Id = id };
             await _mediator.Send(command);
             return NoContent();
-
         }
     }
 }

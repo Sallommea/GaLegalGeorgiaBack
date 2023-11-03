@@ -1,4 +1,5 @@
 using GaLegalGeorgia.Api.Middleware;
+using GaLegalGeorgia.Api.Utilities;
 using GaLegalGeorgia.Application;
 using GaLegalGeorgia.Infrastructure;
 using GaLegalGeorgia.Persistence;
@@ -6,14 +7,13 @@ using GaLegalGeorgia.Persistence;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.RegisterAuthorization();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 builder.Services.AddCors(options =>
 {
-    //   options.AddPolicy("all", builder => builder.AllowAnyOrigin()
-    //   .AllowAnyHeader()
-    //  .AllowAnyMethod());
     options.AddDefaultPolicy(builder =>
     {
         builder.WithOrigins("http://localhost:4200", "http://localhost:4201") // Allow requests from this origin
@@ -21,29 +21,28 @@ builder.Services.AddCors(options =>
                .AllowAnyMethod()
                .AllowCredentials();
     });
-
-}); 
+});
 
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.AddSwaggerDoc();
 
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Use CORS middleware
 app.UseCors();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

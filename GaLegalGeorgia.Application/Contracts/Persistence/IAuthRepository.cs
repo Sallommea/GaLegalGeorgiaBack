@@ -1,14 +1,9 @@
-﻿using GaLegalGeorgia.Application.Features.Admin.Auth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GaLegalGeorgia.Application.Features.Admin.Queries;
 
 namespace GaLegalGeorgia.Application.Contracts.Persistence
 {
     public interface IAuthRepository
     {
-        Task<string> Login(Auth request);
+        Task<string> Login(Authorize request);
     }
 }

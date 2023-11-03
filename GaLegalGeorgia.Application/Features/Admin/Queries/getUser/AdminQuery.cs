@@ -1,12 +1,6 @@
-﻿using GaLegalGeorgia.Application.Features.ConsultationRequest.Queries.GetConsultationRequestDetails;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
 namespace GaLegalGeorgia.Application.Features.Admin.Queries.getUser
 {
-    public record AdminQuery(int Id) : IRequest<AdminDto>;
+    public record AdminQuery(string Email, string Password) : IRequest<string>;
 }

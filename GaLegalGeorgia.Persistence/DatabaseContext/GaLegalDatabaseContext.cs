@@ -1,10 +1,5 @@
 ﻿using GaLegalGeorgia.Domain;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GaLegalGeorgia.Persistence.DatabaseContext
 {
@@ -16,7 +11,8 @@ namespace GaLegalGeorgia.Persistence.DatabaseContext
         public DbSet<PracticeArea> PracticeAreas { get; set; }
         public DbSet<ConsultationRequest> ConsultationRequests { get; set; }
 
-        public DbSet<Admin> Admins { get; set; }
+        public DbSet<AdminModels> Admins { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(GaLegalDatabaseContext).Assembly);

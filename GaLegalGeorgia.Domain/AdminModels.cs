@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GaLegalGeorgia.Domain
 {
-    public class Admin
+    public class AdminModels
     {
         public int AdminId { get; set; }
         public string Username { get; set; } 

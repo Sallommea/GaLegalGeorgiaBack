@@ -33,12 +33,10 @@ namespace GaLegalGeorgia.Application.Features.Admin.Command.UpdateUser
                 throw new BadRequestException("Invalid Request", validationResult);
             }
             // convert to domain entity object
-            var adminToUpdate = _mapper.Map<Domain.Admin>(request);
+            var adminToUpdate = _mapper.Map<Domain.AdminModels>(request);
 
             // add to database
-            await _adminRepository.UpdateAsync(adminToUpdate);
-
-
+            //await _adminRepository.UpdateAsync(adminToUpdate);
         }
     }
 }

@@ -16,12 +16,6 @@ namespace GaLegalGeorgia.Application.Features.Admin.Command.UpdateUser
             .WithMessage("Email is required")
             .EmailAddress()
             .WithMessage("Email is invalid");
-
-            RuleFor(x => x.Password)
-                .NotEmpty()
-                .WithMessage("Password is required")
-                .MinimumLength(8)
-                .WithMessage("Invalid password");
         }
     }
 }

@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace GaLegalGeorgia.Application.Features.Admin.Queries
 {
-    public sealed record Auth(string Email, string Password) : IRequest<string>;
+    public sealed record Authorize(string Email, string Password) : IRequest<string>;
     
 }

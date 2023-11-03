@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GaLegalGeorgia.Domain;
 
 namespace GaLegalGeorgia.Application.Contracts.Persistence
 {
-    internal interface IAdminRepository
+    public interface IAdminRepository
     {
+        Task<AdminModels> GetAdmin();
     }
 }
