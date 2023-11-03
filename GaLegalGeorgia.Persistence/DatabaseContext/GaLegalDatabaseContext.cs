@@ -11,7 +11,7 @@ namespace GaLegalGeorgia.Persistence.DatabaseContext
         public DbSet<PracticeArea> PracticeAreas { get; set; }
         public DbSet<ConsultationRequest> ConsultationRequests { get; set; }
 
-        public DbSet<AdminModels> Admins { get; set; }
+        public DbSet<AdminModel> Admins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

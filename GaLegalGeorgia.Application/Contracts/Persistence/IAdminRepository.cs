@@ -4,6 +4,6 @@ namespace GaLegalGeorgia.Application.Contracts.Persistence
 {
     public interface IAdminRepository
     {
-        Task<AdminModels> GetAdmin();
+        Task<AdminModel> GetAdmin();
     }
 }

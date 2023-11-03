@@ -29,7 +29,7 @@ namespace GaLegalGeorgia.Application.Features.Admin.Queries.getUser
 
             //var admin = await _adminRepository.GetAdmin();
 
-            var admin = new AdminModels()
+            var admin = new AdminModel()
             {
                 AdminId = 1,
                 PasswordHash = "5c3c0d931d31a694bb4fdc39fc2ec15bb4875f3daba89c3018fe5f5ca96b7d37",
